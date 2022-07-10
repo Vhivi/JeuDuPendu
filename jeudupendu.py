@@ -78,20 +78,24 @@ for _ in range(0, 5):
 # Définition de la liste des lettres jouées dans la partie
 lettrejouee = []
 
+
 # On va choisir le mot de façon aléatoire dans la liste
 def choixMot():
     indiceMot = random.randint(1, len(listeMot))
     motChoisi = listeMot[indiceMot]
     return motChoisi.upper()
 
+
 # On affiche le visuel du mot caché
 def afficherMot(gagne=None):
     print(motCache[0] + " " + motCache[1] + " " + motCache[2] + " "
           + motCache[3] + " " + motCache[4])
-    
-    if gagne :
+
+    if gagne:
         print('Bravo ! Vous avez trouvé le mot.')
 
+
+# On génère la potence pour l'affichage aux échecs.
 def afficherPendu(tour):
     pendu = ['___|___',
              '''   |
@@ -156,6 +160,7 @@ ___|___''']
 
     print(pendu[tour])
 
+
 # On va effectuer la révélation
 def revelation(lettre, mot):
     indexTour = 0
@@ -174,11 +179,10 @@ def revelation(lettre, mot):
 def main():
     # Définition du tour du pendu
     penduTour = 0
-    
+
     print('Le mot choisi comprend 5 lettres.')
     # On récupère le mot choisi
     mot = choixMot()
-    #mot = "Koala".upper()
 
     while True:
         afficherMot()
@@ -210,7 +214,7 @@ def main():
                 print('Dommage, réessaie encore !')
                 afficherPendu(penduTour)
                 penduTour += 1
-        
+
         if penduTour == 11:
             print('Dommage, vous avez perdu.')
             break
