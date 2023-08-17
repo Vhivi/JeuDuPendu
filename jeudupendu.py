@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Projet de jeu dupendu
+# Projet de jeu du pendu
 
 # Un mot est choisi soit par le joueur adverse, soit par le programme. Et le
 # joueur dispose de tout l’alphabet pour deviner les lettres.
@@ -19,56 +19,11 @@
 from operator import index
 import random
 
-# Définition de la liste de mot
+# Définition de la liste de mot en fonction du fichier listemot.txt
 # Mot de 5 lettres
 # Aucun accent
-listeMot = ["Acces",
-            "Aimer",
-            "Aloes",
-            "Assez",
-            "Avion",
-            "Awale",
-            "Balai",
-            "Banjo",
-            "Barbe",
-            "Bonne",
-            "Bruit",
-            "Buche",
-            "Cache",
-            "Capot",
-            "Carte",
-            "Chien",
-            "Crane",
-            "Cycle",
-            "Ebene",
-            "Essai",
-            "Gifle",
-            "Honni",
-            "Jambe",
-            "Koala",
-            "Livre",
-            "Lourd",
-            "Maman",
-            "Moult",
-            "Noeud",
-            "Ortie",
-            "Peche",
-            "Poire",
-            "Pomme",
-            "Poste",
-            "Prune",
-            "Radar",
-            "Radis",
-            "Robot",
-            "Route",
-            "Rugby",
-            "Seuil",
-            "Taupe",
-            "Tenue",
-            "Texte",
-            "Tyran",
-            "Usuel",
-            "Valse"]
+with open('listemot.txt', 'r') as f:
+    listeMot = [mot.strip() for mot in f.readlines()]
 
 # Définition du visuel du mot caché
 motCache = []
