@@ -138,8 +138,7 @@ def main():
     penduTour = 0
 
     # On récupère le mot choisi et le mot caché
-    mot = choixMot()[0]
-    motCache = choixMot()[1]
+    mot, motCache = choixMot()
     # On affiche le nombre de lettre du mot
     print('Le mot choisi comprend {} lettres.'.format(len(mot)))
 
