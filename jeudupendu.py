@@ -25,26 +25,28 @@ import random
 with open('listemot.txt', 'r') as f:
     listeMot = [mot.strip() for mot in f.readlines()]
 
-# Définition du visuel du mot caché
-motCache = []
-for _ in range(0, 5):
-    motCache.append("_")
 
 # Définition de la liste des lettres jouées dans la partie
 lettrejouee = []
 
 
 # On va choisir le mot de façon aléatoire dans la liste
+# On retourne le mot choisi et sa longueur pour la révélation
 def choixMot():
-    indiceMot = random.randint(1, len(listeMot))
+    indiceMot = random.randint(1, len(listeMot) - 1)
     motChoisi = listeMot[indiceMot]
-    return motChoisi.upper()
+    
+    # Définition du visuel du mot caché
+    motCache = []
+    for _ in range(0, len(motChoisi)):
+        motCache.append("_")
+    
+    return motChoisi.upper(), motCache
 
 
 # On affiche le visuel du mot caché
-def afficherMot(gagne=None):
-    print(motCache[0] + " " + motCache[1] + " " + motCache[2] + " "
-          + motCache[3] + " " + motCache[4])
+def afficherMot(motCache, gagne=None):
+    print(" ".join(motCache))
 
     if gagne:
         print('Bravo ! Vous avez trouvé le mot.')
@@ -117,7 +119,7 @@ ___|___''']
 
 
 # On va effectuer la révélation
-def revelation(lettre, mot):
+def revelation(lettre, mot, motCache):
     indexTour = 0
     # On liste chaque caractère du mot
     motList = list(mot)
@@ -135,12 +137,15 @@ def main():
     # Définition du tour du pendu
     penduTour = 0
 
-    print('Le mot choisi comprend 5 lettres.')
-    # On récupère le mot choisi
-    mot = choixMot()
+    # On récupère le mot choisi et le mot caché
+    mot = choixMot()[0]
+    motCache = choixMot()[1]
+    # On affiche le nombre de lettre du mot
+    print('Le mot choisi comprend {} lettres.'.format(len(mot)))
+
 
     while True:
-        afficherMot()
+        afficherMot(motCache)
         # On vérifie si il reste des lettres à découvrir et on affiche les
         # lettres cachées
         if "_" in motCache:
@@ -163,7 +168,7 @@ def main():
             if lettre in mot:
                 print('Bingo ! Vous avez trouvé une lettre.')
                 # On procède à la révélation
-                revelation(lettre, mot)
+                revelation(lettre, mot, motCache)
             # Sinon
             else:
                 print('Dommage, réessaie encore !')
@@ -172,6 +177,7 @@ def main():
 
         if penduTour == 11:
             print('Dommage, vous avez perdu.')
+            print('Le mot était : {}'.format(mot))
             break
 
 main()
